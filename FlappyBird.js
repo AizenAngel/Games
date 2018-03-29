@@ -2,14 +2,18 @@
 var canvas = document.getElementById("app");
 var context = canvas.getContext("2d");
 
+var points = 0;
 var ballX = 200;
 var ballY = 400;
-var paddleX1 = 600;
-var paddleX2 = 1000;
-var paddleX3 = 1400;
-var paddleX4 = 1800;
-var paddleX5 = 2200;
-var paddleX6 = 2600;
+var paddleX1 = 700;
+var paddleX2 = 1200;
+var paddleX3 = 1700;
+var paddleX4 = 2200;
+var paddleX5 = 2700;
+var paddleX6 = 3200;
+
+var stop = false;
+//3000+90
 //paddle1Y
 var paddle1Y1 = Math.floor((Math.random())*750 + 1)-5;
 var paddle1Y2 = 900-250-paddle1Y1;
@@ -35,8 +39,8 @@ var paddle6Y1 = Math.floor((Math.random())*750 + 1)-5;
 var paddle6Y2 = 900-250-paddle6Y1;
 
 
-
 function moveBall(){
+
   canvas.addEventListener("click", function(evt){
     ballY = ballY - 50;
   });
@@ -57,6 +61,7 @@ window.onload = function(){
 }
 
 function moveEverything(){
+
   ballY += 15;
   paddleX1 -= 15;
   paddleX2 -= 15;
@@ -88,13 +93,13 @@ function drawEverything(){
   context.fillRect(paddleX1,900-paddle1Y2,10,paddle1Y2);
 
   if(paddleX1 <= 0){
-    paddleX1 = 2400;
+    paddleX1 = 3100;
     paddle1Y1 = Math.floor((Math.random())*750 + 1)-5;
     paddle1Y2 = 900-250-paddle1Y1;
   }
 
   if(paddleX2 <= 0){
-    paddleX2 = 2400;
+    paddleX2 = 3105;
     paddle2Y1 = Math.floor((Math.random())*750 + 1)-5;
     paddle2Y2 = 900-250-paddle2Y1;
   }
@@ -118,7 +123,8 @@ function drawEverything(){
   context.fillRect(paddleX3,900-paddle3Y2,10,paddle3Y2);
 
   if(paddleX3 <= 0){
-    paddleX3 = 2400;
+    //3200
+    paddleX3 = 3095;
     paddle3Y1 = Math.floor((Math.random())*750 + 1)-5;
     paddle3Y2 = 900-250-paddle3Y1;
   }
@@ -132,7 +138,8 @@ function drawEverything(){
   context.fillRect(paddleX4,900-paddle4Y2,10,paddle4Y2);
 
   if(paddleX4 <= 0){
-    paddleX4 = 2400;
+    //2200
+    paddleX4 = 3100;
     paddle4Y1 = Math.floor((Math.random())*750 + 1)-5;
     paddle4Y2 = 900-250-paddle4Y1;
   }
@@ -146,11 +153,10 @@ function drawEverything(){
   context.fillRect(paddleX5,900-paddle5Y2,10,paddle5Y2);
 
   if(paddleX5 <= 0){
-    paddleX5 = 2400;
+    paddleX5 = 3105;
     paddle5Y1 = Math.floor((Math.random())*750 + 1)-5;
     paddle5Y2 = 900-250-paddle5Y1;
   }
-
 
   //sixthWall1
   context.fillStyle = "white";
@@ -162,11 +168,38 @@ function drawEverything(){
 
 
   if(paddleX6 <= 0){
-    paddleX6 = 2400;
+    paddleX6 = 3095;
     paddle6Y1 = Math.floor((Math.random())*750 + 1)-5;
     paddle6Y2 = 900-250-paddle6Y1;
   }
+
+  if(paddleX1 == 190  && (ballY > (5 + paddle1Y1)) && (ballY < 900 - paddle1Y2)){
+    points++;
+  }
+
+  if(paddleX2 == 195  && (ballY > (5 + paddle2Y1)) && (ballY < 900 - paddle2Y2)){
+    points++;
+  }
+
+  if(paddleX3 == 200  && (ballY > (5 + paddle3Y1)) && (ballY < 900 - paddle3Y2)){
+    points++;
+  }
+
+  if(paddleX4 == 190  && (ballY > (5 + paddle4Y1)) && (ballY < 900 - paddle4Y2)){
+    points++;
+  }
+
+  if(paddleX5 == 195  && (ballY > (5 + paddle5Y1)) && (ballY < 900 - paddle5Y2)){
+    points++;
+  }
+
+  if(paddleX6 == 200  && (ballY > (5 + paddle6Y1)) && (ballY < 900 - paddle6Y2)){
+    points++;
+  }
+
+ // console.log(points);
 }
+
 
 //index.html
 <!DOCTYPE html>
