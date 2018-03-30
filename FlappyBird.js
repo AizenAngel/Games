@@ -12,8 +12,8 @@ var paddleX4 = 2200;
 var paddleX5 = 2700;
 var paddleX6 = 3200;
 
-var stop = false;
-//3000+90
+stop = false;
+
 //paddle1Y
 var paddle1Y1 = Math.floor((Math.random())*750 + 1)-5;
 var paddle1Y2 = 900-250-paddle1Y1;
@@ -39,28 +39,43 @@ var paddle6Y1 = Math.floor((Math.random())*750 + 1)-5;
 var paddle6Y2 = 900-250-paddle6Y1;
 
 
-function moveBall(){
-
-  canvas.addEventListener("click", function(evt){
-    ballY = ballY - 50;
-  });
-}
-
-
 window.onload = function(){
 
   moveBall();
-
   setInterval(function(){
     drawEverything(),
     moveEverything()
   },90);
 
- moveBall();
+}
+
+function reset(){
+  points = 0;
+  ballX = 200;
+  ballY = 400;
+  paddleX1 = 700;
+  paddleX2 = 1200;
+  paddleX3 = 1700;
+  paddleX4 = 2200;
+  paddleX5 = 2700;
+  paddleX6 = 3200;
 
 }
 
+function moveBall(){
+   if(stop){
+     return;
+   }
+  canvas.addEventListener("click", function(evt){
+    ballY = ballY - 150;
+  });
+}
+
+
 function moveEverything(){
+  if(stop){
+    return;
+  }
 
   ballY += 15;
   paddleX1 -= 15;
@@ -73,8 +88,16 @@ function moveEverything(){
 
 function drawEverything(){
 
+  if(stop){
+    window.alert("Osvojili ste "+points+" poena.Kliknite OK da igra krene.");
+    stop = false;
+    reset();
+  }
+
+
   context.fillStyle = "black";
   context.fillRect(0,0,canvas.width, canvas.height);
+
 
   //drawBall();
   context.fillStyle = "green";
@@ -173,35 +196,55 @@ function drawEverything(){
     paddle6Y2 = 900-250-paddle6Y1;
   }
 
-  if(paddleX1 == 190  && (ballY > (5 + paddle1Y1)) && (ballY < 900 - paddle1Y2)){
+  else if(paddleX1 == 190  && (ballY > (5 + paddle1Y1)) && (ballY < 900 - paddle1Y2)){
     points++;
+  } else if(paddleX1 == 190  && !((ballY > (5 + paddle1Y1)) && (ballY < 900 - paddle1Y2))){
+    stop = true;
+    return;
   }
 
-  if(paddleX2 == 195  && (ballY > (5 + paddle2Y1)) && (ballY < 900 - paddle2Y2)){
+  else if(paddleX2 == 195  && (ballY > (5 + paddle2Y1)) && (ballY < 900 - paddle2Y2)){
     points++;
+  }else if(paddleX2 == 195  && !((ballY > (5 + paddle2Y1)) && (ballY < 900 - paddle2Y2))){
+    stop = true;
+    return;
   }
 
-  if(paddleX3 == 200  && (ballY > (5 + paddle3Y1)) && (ballY < 900 - paddle3Y2)){
+  else if(paddleX3 == 200  && (ballY > (5 + paddle3Y1)) && (ballY < 900 - paddle3Y2)){
     points++;
+  }else if(paddleX3 == 200  && !((ballY > (5 + paddle3Y1)) && (ballY < 900 - paddle3Y2))){
+    stop = true;
+    return;
   }
 
-  if(paddleX4 == 190  && (ballY > (5 + paddle4Y1)) && (ballY < 900 - paddle4Y2)){
+  else if(paddleX4 == 190  && (ballY > (5 + paddle4Y1)) && (ballY < 900 - paddle4Y2)){
     points++;
+  }else if(paddleX4 == 190  && !((ballY > (5 + paddle4Y1)) && (ballY < 900 - paddle4Y2))){
+    stop = true;
+    return;
   }
 
-  if(paddleX5 == 195  && (ballY > (5 + paddle5Y1)) && (ballY < 900 - paddle5Y2)){
+  else if(paddleX5 == 195  && (ballY > (5 + paddle5Y1)) && (ballY < 900 - paddle5Y2)){
     points++;
+  }else if(paddleX5 == 195  && !((ballY > (5 + paddle5Y1)) && (ballY < 900 - paddle5Y2))){
+    stop = true;
+    return;
   }
 
-  if(paddleX6 == 200  && (ballY > (5 + paddle6Y1)) && (ballY < 900 - paddle6Y2)){
+  else if(paddleX6 == 200  && (ballY > (5 + paddle6Y1)) && (ballY < 900 - paddle6Y2)){
     points++;
+  }else if(paddleX6 == 200  && !((ballY > (5 + paddle6Y1)) && (ballY < 900 - paddle6Y2))){
+    stop = true;
+    return;
   }
 
- // console.log(points);
+  else if(ballY >= canvas.height || ballY <= 0){
+    stop = true;
+    return;
+  }
+
 }
-
-
-//index.html
+//<!--index.html-->
 <!DOCTYPE html>
 <html lang = "en-US">
 <head>
